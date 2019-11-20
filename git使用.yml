@@ -1,0 +1,52 @@
+開新任務 :
+  branch : master
+  new_branch_name : feature/20191029_task_name
+  git_cmd : git checkout master && git pull && git checkout -b feature/20191029_task_name
+
+  task_category :
+      - hotfix  (線上急迫更新)
+      - feature (未來新功能)
+      - bugfix  (已有功能, 但存在bug)
+      - test    (測試使用)
+      - release (預計要上的版本)
+
+每日更新 :
+  git_cmd : git checkout master && git pull && \ 
+            git checkout feature/20191029_task_name && \
+            git merge master 
+  git_cmd2(better):  git checkout master && git pull && \ 
+                     git checkout feature/20191029_task_name && \
+                     git rebase master 
+  git_cmd_commit : git commit -m "[todo] task imple"
+
+
+推上綜合測試環境 :
+  git_cmd : 
+      - git checkout dev && git pull && git merge feature/20191029_task_name --squash
+      - make cmt
+
+
+p.s : 
+    - 各服務都有 makefile , 
+    - 指令 make cmt  =	git add . && git commit -F commit-file && git pull
+      其中 -F  讀取檔案 的flag
+    - commit-file 已經加入到 .gitignore 裡
+    - git merge feature/20191029_task_name --squash
+      --squash 是把多個commit 合併成一筆
+
+
+
+# ------------------------------------------------------------------
+
+commit-file
+
+# base_version 從哪個master 版本為基底, 如果有執行 以merge or rebase 到 feature/20191029_task_name 最後版本為準
+base_version  : v2.0.3
+title : 
+note :
+    1.[todo]
+        - open msgRecall, msgRecallByAdmin to v2
+    2.[update]
+    3.[issue]
+    4.[log]
+# ------------------------------------------------------------------
